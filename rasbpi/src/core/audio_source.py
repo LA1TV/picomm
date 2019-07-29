@@ -47,6 +47,10 @@ class AudioSource:
         bus.connect("message::error", self._on_error)
         self.pipeline.set_state(Gst.State.PLAYING)
 
+    def stop():
+        self.log.debug('Stopping pipeline')
+        self.pipeline.set_state(Gst.State.NULL)
+
     def launch_pipeline(self):
         pipeline = """
             udpsrc uri=udp://{host}:{port} caps="{caps}" !
