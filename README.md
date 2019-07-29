@@ -1,5 +1,6 @@
 # PiComms
 Digital Audio over IP comms system
+Uses a MQTT broker  to send messages
 
 ## Developer Setup
 
