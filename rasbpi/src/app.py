@@ -10,16 +10,18 @@ import paho.mqtt.client as mqtt
 import logging
 import gi
 import sys
+from core.audio_source import AudioSource
 
 gi.require_version('Gst', '1.0')
 from gi.repository import GObject, Gst, GLib
 
-logging.basicConfig(level=logging.INFO)
+Gst.init(None)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 def on_connect(client, userdata, flags, rc):
     logging.info("Connected with result code "+str(rc))
-    client.subscribe("comms/new-client")
+    client.subscribe("comms/connect")
 
 def on_message(client, userdata, msg):
     logger.debug('on_message payload: %s', str(msg.payload))
@@ -34,6 +36,7 @@ except ConnectionRefusedError:
     logging.error("failed to connect to mqtt broker")
     sys.exit(1)
 
+source = AudioSource("source_1", "0.0.0.0", 5001)
 
 try:
     loop = GLib.MainLoop()
@@ -45,5 +48,4 @@ except KeyboardInterrupt:
     client.loop_stop()
     client.disconnect()
     logging.info("Exiting main thread")
-    time.sleep(2)
     sys.exit(0)
