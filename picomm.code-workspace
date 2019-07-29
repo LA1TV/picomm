@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "./rasbpi"
+		},
+		{
+			"path": "webui"
+		}
+	],
+	"settings": {}
+}
