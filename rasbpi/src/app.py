@@ -36,7 +36,7 @@ def on_message(client, userdata, msg):
     payload = json.loads(str(msg.payload))
 
     source = AudioSource(source_name, payload["host"], payload["port"])
-    audiomixer.link(source)
+    mixer.link(source)
     sources[source_name] = source
 
 client = mqtt.Client()
