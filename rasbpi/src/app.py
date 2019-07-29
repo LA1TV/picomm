@@ -55,6 +55,10 @@ try:
     client.loop_start()
     loop.run()
 except KeyboardInterrupt:
+    for _, source in sources.items():
+        source.stop()
+        source = None
+
     loop.quit()
     client.loop_stop()
     client.disconnect()
